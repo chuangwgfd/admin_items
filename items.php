@@ -44,10 +44,12 @@ $page = $page < 1  ? 1 : $page;
         <!-- main -->
         <div class="row"> <!-- breadcrumb -->
 			<ol class="breadcrumb">
-				<li><a href="#">
-					<em class="fa fa-home"></em>
-				</a></li>
-				<li class="active">Forms</li>
+				<li>
+					<a href="#">
+						<em class="fa fa-home"></em>
+					</a>
+				</li>
+				<li class="active">商品資料管理</li>
 			</ol>
         </div>
         <div class="row">
@@ -58,11 +60,13 @@ $page = $page < 1  ? 1 : $page;
         <div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
+					<form name="myForm" method="POST" action="./itemBanned.php">
 					<div class="panel-heading">全部</div>
 					<div class="panel-body">
 						<div class="col-md-12">
 							<span class="large col-lg-3"><?php echo $total; ?> Products</span>
-							<div class="col-lg-offset-9">
+							<div class="col-lg-offset-8">
+							<input class="btn btn-lg btn-danger" type="submit" name="smb" value="Θ禁賣下架">
 							<a class="" href="./itemNew.php"><button type="button" class="btn btn-lg btn-danger">＃編輯類別</button></a>
 							<a class="" href="./itemNew.php"><button type="button" class="btn btn-lg btn-danger">＋新增商品</button></a>
 							</div>
@@ -124,7 +128,7 @@ $page = $page < 1  ? 1 : $page;
 										<td>-</td>
 										<td><?php echo $arr[$i]['itemStatus']?></td>
 										<td>
-                                            <a  href="./itemEdit.php?editId=<?php echo $arr[$i]['itemId'] ?>" onclick="return confirm('Are you sure?')"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>修改 </a>
+                                            <a  href="./itemEdit.php?editId=<?php echo $arr[$i]['itemId'] ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>修改 </a>
                                             <a href="./itemDelete.php?deleteId=<?php echo $arr[$i]['itemId'] ?>" onclick="return confirm('是否確定要刪除?')"><i class="fa fa-trash-o" aria-hidden="true"></i>刪除 </a>
                                         </td>
                                     </tr>
@@ -148,7 +152,8 @@ $page = $page < 1  ? 1 : $page;
 								</tfoot>
                             </table>
                         </div>
-                    </div>		
+                    </div>
+				</form>	
 				</div>
 			</div>
 		</div>

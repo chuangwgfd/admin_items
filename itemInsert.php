@@ -4,11 +4,12 @@
 // print_r($_POST);
 // echo "</pre>";
 // exit();
+
 require_once("./db.inc.php");
 
-$sql = "INSERT INTO `items`(`itemImg`, `itemName`, `itemDescription`,                                    `itemCategoryId`, `itemMaterial`, `itemBrandId`, `itemPrice`, 
+$sql = "INSERT INTO `items`(`itemId`, `itemImg`, `itemName`, `itemDescription`, `itemCategoryId`, `itemTypeId`, `itemMaterial`, `itemBrandId`, `itemPrice`, 
                     `itemQty`, `itemSize`)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 if( $_FILES["itemImg"]["error"] == 0 ){
     $itemImg = date("YmdHis");
@@ -23,10 +24,12 @@ if( $_FILES["itemImg"]["error"] == 0 ){
 }
 
 $arrParam = [
+    $_POST['itemId'],
     $imgFileName,
     $_POST['itemName'],
     $_POST['itemDescription'],
     $_POST['itemCategoryId'],
+    $_POST['itemTypeId'],
     $_POST['itemMaterial'],
     $_POST['itemBrandId'],
     $_POST['itemPrice'],

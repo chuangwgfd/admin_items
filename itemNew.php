@@ -94,7 +94,7 @@
                                
                                 <div class="form-group">
                                     <label>商品名稱</label>
-                                    <input class="form-control" type="text" name="itemName" id="itemName" value="" maxlength="50">
+                                    <input class="form-control" type="text" name="itemName" id="itemName" value="" maxlength="100">
                                 </div>
                                 <div class="form-group">
 									<label>商品描述</label>
@@ -111,7 +111,7 @@
                                 
                                 <div class="form-group">
 									<label>商品品牌</label>
-									<input class="form-control" type="text" name="itemBrandId" id="itemBrandId" value="" maxlength="10">
+									<input class="form-control" type="text" name="itemBrandId" id="itemBrandId" value="" maxlength="30">
                                 </div>
 
 
@@ -168,7 +168,7 @@
                                 
                                 <div class="form-group">
                                     <label>商品尺寸</label>
-                                    <input class="form-control" type="number"" name="itemSize" id="itemSize" value="" maxlength="5">
+                                    <input class="form-control" type="text"" name="itemSize" id="itemSize" value="" maxlength="10">
                                 </div>
                                 
                             </div>

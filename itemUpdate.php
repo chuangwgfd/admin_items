@@ -118,12 +118,13 @@ if(!$stmt){
 
 $stmt->execute($arrParam);
 
+$previousPage = $_SERVER["HTTP_REFERER"];
 if( $stmt->rowCount() > 0 ){
-    header("Refresh: 3; url=./items.php");
-    echo "更新成功";
+    header("Refresh: 0.1; url=./items.php");
+    echo "<script>alert('修改成功')</script>";
     exit();
 } else {
     header("Refresh: 3; url=./items.php");
-    echo "沒有任何更新";
+    echo "<script>alert('修改失敗')</script>";
     exit();
 }

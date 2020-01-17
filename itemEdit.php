@@ -87,7 +87,7 @@
                                 
                                 <div class="form-group">
                                     <label>商品名稱</label>
-                                    <input class="form-control" type="text" name="itemName" id="itemName" value="<?php echo $arr['itemName']; ?>" maxlength="30">
+                                    <input class="form-control" type="text" name="itemName" id="itemName" value="<?php echo $arr['itemName']; ?>" maxlength="100">
                                 </div>
                                 <div class="form-group">
 									<label>商品描述</label>
@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="form-group">
 									<label>商品品牌</label>
-									<input class="form-control" type="text" name="itemBrandId" id="itemBrandId" value="<?php echo $arr['itemBrandId']; ?>" maxlength="10">
+									<input class="form-control" type="text" name="itemBrandId" id="itemBrandId" value="<?php echo $arr['itemBrandId']; ?>" maxlength="30">
                                 </div>
                             
                                 
@@ -155,7 +155,7 @@
                                 
                                 <div class="form-group">
                                     <label>商品尺寸</label>
-                                    <input class="form-control" type="number"" name="itemSize" id="itemSize" value="<?php echo $arr['itemSize']; ?>" maxlength="5">
+                                    <input class="form-control" type="text"" name="itemSize" id="itemSize" value="<?php echo $arr['itemSize']; ?>" maxlength="10">
                                 </div>
                                 
                             </div>
@@ -180,7 +180,9 @@
                     <input type="hidden" name="editId" value="<?php echo $_GET['editId']; ?>">
                     <input class="btn btn-primary btn-lg py" name="smb" type="submit"  value="修改">
                     
-                    <a href="./items.php"><button type="button" class="btn btn-default btn-lg py">取消</button></a>
+                    <!-- <a href="./items.php"> -->
+                        <button onclick="window.history.go(-1);" type="button" class="btn btn-default btn-lg py">取消</button>
+                    <!-- </a> -->
                 </form>
 			
             </div>

@@ -17,10 +17,10 @@ if( $_FILES["itemImg"]["error"] == 0 ){
     $imgFileName = $itemImg.".".$extension;
 
     if(!move_uploaded_file($_FILES["itemImg"]["tmp_name"], "./files/".$imgFileName)){
-        header("Refresh: 3; url=./items.php");
-        echo "uploading failed";
+        header("Refresh: 0.1; url=./items.php");
+        echo "<script>alert('上傳失敗')</script>";
         exit();
-    }
+    } 
 }
 
 $arrParam = [
@@ -47,12 +47,12 @@ $stmt->execute($arrParam);
 
 
 if( $stmt->rowCount() > 0 ){
-    header("Refresh: 3; url=./items.php");
-    echo "Success";
+    header("Refresh: 0.1; url=./items.php");
+    echo "<script>alert('新增成功')</script>";
     exit();
 } else {
     // print_r($pdo->errorInfo());
-    // header("Refresh: 3; url=./items.php");
-    echo "failed";
+    header("Refresh: 0.1; url=./items.php");
+    echo "<script>alert('新增失敗')</script>";
     exit();
 }

@@ -29,10 +29,10 @@ for( $i = 0; $i < count($_POST['chk']); $i++ ){
 }
 
 if( $count > 0 ){
-    header("Refresh: 3; url=./items.php");
-    echo "刪除成功";
+    header("Refresh: 0.1; url=./items.php");
+    echo "<script>alert('修改成功')</script>";
 } else {
     print_r($pdo->errorInfo());
-    header("Refresh: 3; url=./items.php");
-    echo "failed";
+    header("Refresh: 0.1; url=./items.php");
+    echo "<script>alert('修改失敗')</script>";
 }

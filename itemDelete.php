@@ -38,9 +38,9 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute($arrParam);
 
 if($stmt->rowCount() > 0) {
-    header("Refresh: 3; url=./items.php");
-    echo "刪除成功";
+    header("Refresh: 0.1; url=./items.php");
+    echo "<script>alert('刪除成功')</script>";
 } else {
-    header("Refresh: 3; url=./items.php");
-    echo "刪除失敗";
+    header("Refresh: 0.1; url=./items.php");
+    echo "<script>alert('刪除失敗')</script>";
 }

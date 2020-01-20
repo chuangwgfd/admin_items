@@ -1,17 +1,17 @@
 <?php
 
+
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
+exit();
+
 require_once('./db.inc.php');
-
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
-// exit();
-
 
 
 
 $sql = "UPDATE `items` 
-        SET `itemStatus` = 'banned'
+        SET `itemStatus` = '禁賣'
         WHERE `itemId` = ? ";
 
 $count = 0;

@@ -23,7 +23,7 @@ if($stmtGetImg->rowCount() > 0) {
     //若是 studentImg 裡面不為空值，代表過去有上傳過
     if($arrImg[0]['itemImg'] !== NULL){
         //刪除實體檔案
-        @unlink("./files/".$arrImg[0]['itemImg']);
+        @unlink("../image/items/".$arrImg[0]['itemImg']);
     }     
 }
 

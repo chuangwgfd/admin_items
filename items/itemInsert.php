@@ -1,7 +1,7 @@
 <?php
 // require_once("./checkSession.php");
 // echo "<pre>";
-// print_r($_POST);
+// print_r($_FILES);
 // echo "</pre>";
 // exit();
 
@@ -16,11 +16,13 @@ if( $_FILES["itemImg"]["error"] == 0 ){
     $extension = pathinfo($_FILES["itemImg"]["name"], PATHINFO_EXTENSION);
     $imgFileName = $itemImg.".".$extension;
 
-    if(!move_uploaded_file($_FILES["itemImg"]["tmp_name"], "./files/".$imgFileName)){
-        header("Refresh: 0.1; url=./items.php");
+    if(!move_uploaded_file($_FILES["itemImg"]["tmp_name"], "../image/items/".$imgFileName)){
+        header("Refresh: 5; url=./items.php");
         echo "<script>alert('上傳失敗')</script>";
         exit();
     } 
+} else{
+    $imgFileName = " ";
 }
 
 $arrParam = [
@@ -52,7 +54,7 @@ if( $stmt->rowCount() > 0 ){
     exit();
 } else {
     // print_r($pdo->errorInfo());
-    header("Refresh: 0.1; url=./items.php");
+    header("Refresh: 5; url=./items.php");
     echo "<script>alert('新增失敗')</script>";
     exit();
 }

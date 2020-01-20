@@ -54,7 +54,7 @@ if( $_FILES["itemImg"]["error"] === 0 ) {
     $imgFileName = $strDatetime.".".$extension;
 
     //若上傳成功，則將上傳檔案從暫存資料夾，移動到指定的資料夾或路徑
-    if( move_uploaded_file($_FILES["itemImg"]["tmp_name"], "./files/".$imgFileName) ) {
+    if( move_uploaded_file($_FILES["itemImg"]["tmp_name"], "../image/items/".$imgFileName) ) {
         /**
          * 刪除先前的舊檔案: 
          * 一、先查詢出特定 id (editId) 資料欄位中的大頭貼檔案名稱
@@ -82,7 +82,7 @@ if( $_FILES["itemImg"]["error"] === 0 ) {
             //若是 studentImg 裡面不為空值，代表過去有上傳過
             if($arrImg[0]['itemImg'] !== NULL){
                 //刪除實體檔案
-                @unlink("./files/".$arrImg[0]['itemImg']);
+                @unlink("../image/items/".$arrImg[0]['itemImg']);
             } 
             
             /**
@@ -100,7 +100,9 @@ if( $_FILES["itemImg"]["error"] === 0 ) {
             $arrParam[] = $imgFileName;
             
         }
-    }
+    } 
+
+    
 }
 
 

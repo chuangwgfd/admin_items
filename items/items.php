@@ -32,9 +32,9 @@ $total = $pdo->query($sqlTotal)->fetch(PDO::FETCH_NUM)[0];
 	<link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
 	<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 	<script>
-		$(document).ready( function () {
-			$('#myTable').DataTable();
-			} );
+		// $(document).ready( function () {
+		// 	$('#myTable').DataTable();
+		// 	} );
 		
 		
 
@@ -78,7 +78,7 @@ $total = $pdo->query($sqlTotal)->fetch(PDO::FETCH_NUM)[0];
 
 							<button type="button" onclick="check(this.form)" class="btn btn-lg btn-danger" data-toggle="modal" data-target="#exampleModal">批次修改</button>
 
-							<input class="btn btn-lg btn-danger" type="submit" name="smb" value="Θ禁賣下架">
+							
 							<a class="" href="./itemNew.php"><button type="button" class="btn btn-lg btn-danger">＃編輯類別</button></a>
 							<a class="" href="./itemNew.php"><button type="button" class="btn btn-lg btn-danger">＋新增商品</button></a>
 							</div>
@@ -180,18 +180,20 @@ $total = $pdo->query($sqlTotal)->fetch(PDO::FETCH_NUM)[0];
 					</div>
 					<div class="modal-body">
 
-					<input type="hidden" name="chk[]" value="<?php  echo $post;?>" id="itemId">
+					<!-- <input type="hidden" name="chk[]" value="<?php  echo $post;?>" id="itemId"> -->
+					<!-- <input id="chk"> -->
 
 					<label>商品類別</label>
 					<select class="form-control slt" name="itemStatus" id="itemStatus">
 						<option value="上架" selected>上架</option>
 						<option value="下架">下架</option>
 						<option value="禁賣">禁賣</option>
+						<option value="刪除">刪除</option>
 					</select>
 
 					</div>
 					<div class="modal-footer">
-						<button type="submit" name="smb" class="btn btn-primary">確定</button>
+						<button type="submit" onclick="sendchk()" name="smb" class="btn btn-primary">確定</button>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
 					</div>
 				</div>
@@ -211,15 +213,25 @@ $total = $pdo->query($sqlTotal)->fetch(PDO::FETCH_NUM)[0];
 			for (var i = 0; i < obj.length; i++) {
 				if (obj[i].checked) {
 					sele.push(obj[i].value);
+
 				}
 				
 			}
 			console.log(sele);
-			var post = JSON.stringify(sele);
+			sele.forEach(myFunc);
+			function myFunc(itemId) {
+				var newinput = document.createElement("input");
+				newinput.setAttribute('name', 'itemId[]');
+				newinput.setAttribute('type', 'hidden');
+				newinput.setAttribute('value', itemId);
+				var status = document.getElementById("itemStatus");
+				status.insertBefore(newinput, status.childNodes[0]);
+				// document.getElementById("demo").innerHTML += index + ":" + item + "<br>"; 
+			}
+			// console.log(sele);
+			// return sele;
 			
 		}
-		
-	// document.getElementById("result").value = txt;
 	
 	</script>
 	<script src="../js/bootstrap.min.js"></script>

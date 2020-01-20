@@ -5,7 +5,7 @@
 // echo "</pre>";
 // exit();
 
-require_once("./db.inc.php");
+require_once('../template/db.inc.php');
 
 $sql = "INSERT INTO `items`(`itemId`, `itemImg`, `itemName`, `itemDescription`, `itemCategoryId`, `itemTypeId`, `itemMaterial`, `itemBrandId`, `itemPrice`, 
                     `itemQty`, `itemSize`)

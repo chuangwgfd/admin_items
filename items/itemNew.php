@@ -1,5 +1,5 @@
 <?php
-    require_once('./db.inc.php');
+    require_once('../template/db.inc.php');
 
     $sqlTotal = "SELECT count(`itemId`) AS `count` FROM `items`";
     $total = $pdo->query($sqlTotal)->fetch(PDO::FETCH_NUM)[0];

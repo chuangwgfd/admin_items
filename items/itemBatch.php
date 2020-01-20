@@ -3,7 +3,7 @@
     // print_r($_POST);
     // echo "</pre>";
     // exit();
-    require_once("./db.inc.php");
+    require_once('../template/db.inc.php');
 
 
     if ($_POST["itemStatus"]=='刪除') {

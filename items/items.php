@@ -1,6 +1,6 @@
 <?php
 // require_once('./checkSession.php');
-require_once('./db.inc.php');
+require_once('../template/db.inc.php');
 
 $sqlTotal = "SELECT count(`itemId`) AS `count` FROM `items`";
 $total = $pdo->query($sqlTotal)->fetch(PDO::FETCH_NUM)[0];
@@ -73,14 +73,35 @@ $total = $pdo->query($sqlTotal)->fetch(PDO::FETCH_NUM)[0];
 					<div class="panel-heading">全部</div>
 					<div class="panel-body">
 						<div class="col-md-12">
+							<select name="" id="seachType">
+								<option value="itemSellerId" selected>賣家編號</option>
+								<option value="itemId">商品編號</option>
+								<option value="itemName">商品名稱</option>
+								<option value="itemCategory">商品類別</option>
+							</select>
+							<input type="search" name="keyword" id="keyword" value="">
+							<input type="submit" name="sub" id="seachSub" value="搜尋">
+
+							<!-- <div class="form-group">
+								
+								<select class="form-control slt" name="itemTypeId" id="itemTypeId">
+									<option value="蛙鞋" selected>蛙鞋</option>
+									<option value="面鏡">面鏡</option>
+									<option value="防寒衣">防寒衣</option>
+								</select>
+								<input type="text" name="" id="">
+
+							</div> -->
+
+
 							<span class="large col-lg-3"><?php echo $total; ?> Products</span>
 							<div class="col-lg-offset-8">
 
-							<button type="button" onclick="check(this.form)" class="btn btn-lg btn-danger" data-toggle="modal" data-target="#exampleModal">批次修改</button>
+							<button type="button" onclick="check(this.form)" class="btn btn-lg btn-warning" data-toggle="modal" data-target="#exampleModal">批次修改</button>
 
 							
-							<a class="" href="./itemNew.php"><button type="button" class="btn btn-lg btn-danger">＃編輯類別</button></a>
-							<a class="" href="./itemNew.php"><button type="button" class="btn btn-lg btn-danger">＋新增商品</button></a>
+							<a class="" href="./itemNew.php"><button type="button" class="btn btn-lg btn-info">＃編輯類別</button></a>
+							<a class="" href="./itemNew.php"><button type="button" class="btn btn-lg btn-info">＋新增商品</button></a>
 							</div>
 
 							<table id="myTable" class="table sortable">
@@ -193,7 +214,7 @@ $total = $pdo->query($sqlTotal)->fetch(PDO::FETCH_NUM)[0];
 
 					</div>
 					<div class="modal-footer">
-						<button type="submit" onclick="sendchk()" name="smb" class="btn btn-primary">確定</button>
+						<button type="submit" onclick="return confirm('確認批次處理?')" name="smb" class="btn btn-primary">確定</button>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
 					</div>
 				</div>
@@ -232,7 +253,10 @@ $total = $pdo->query($sqlTotal)->fetch(PDO::FETCH_NUM)[0];
 			// return sele;
 			
 		}
-	
+		
+
+
+		$()
 	</script>
 	<script src="../js/bootstrap.min.js"></script>
 	<?php

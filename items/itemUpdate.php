@@ -5,7 +5,7 @@
 // exit();
 
 //引用資料庫連線
-require_once('./db.inc.php');
+require_once('../template/db.inc.php');
 
 /**
  * 注意：

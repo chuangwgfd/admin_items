@@ -1,7 +1,7 @@
 <?php
 
 //引用資料庫連線
-require_once('./db.inc.php');
+require_once('../template/db.inc.php');
 
 //先查詢出特定 id (editId) 資料欄位中的大頭貼檔案名稱
 $sqlGetImg = "SELECT `itemImg` FROM `items` WHERE `itemId` = ? ";

@@ -4,10 +4,10 @@ require_once('../template/db.inc.php');
 
 $sqlTotal = "SELECT count(`itemId`) AS `count` FROM `items`";
 $total = $pdo->query($sqlTotal)->fetch(PDO::FETCH_NUM)[0];
-// $numPerPage = 10;
-// $totalPages = ceil($total/$numPerPage);
-// $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-// $page = $page < 1  ? 1 : $page;
+$numPerPage = 10;
+$totalPages = ceil($total/$numPerPage);
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = $page < 1  ? 1 : $page;
 
 
 ?>
@@ -41,6 +41,11 @@ $total = $pdo->query($sqlTotal)->fetch(PDO::FETCH_NUM)[0];
 		
 		
 	</script>
+	<style>
+		.slt{
+        height:46px;
+    }
+	</style>
 
 </head>
 <body>
@@ -69,18 +74,24 @@ $total = $pdo->query($sqlTotal)->fetch(PDO::FETCH_NUM)[0];
         <div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<form name="myForm" method="POST" action="./itemBanned.php">
+					<form name="myForm" method="POST" id="searchForm" >
 					<div class="panel-heading">全部</div>
 					<div class="panel-body">
-						<div class="col-md-12">
-							<select name="" id="seachType">
+						<div class="col-md-2">
+							<select class="form-control slt" name="searchType" id="searchType">
 								<option value="itemSellerId" selected>賣家編號</option>
 								<option value="itemId">商品編號</option>
 								<option value="itemName">商品名稱</option>
-								<option value="itemCategory">商品類別</option>
+								<option value="itemCategoryId">商品類別</option>
 							</select>
-							<input type="search" name="keyword" id="keyword" value="">
-							<input type="submit" name="sub" id="seachSub" value="搜尋">
+						</div>
+						<div class="col-md-3">
+							<input class="form-control" type="text" maxlength="10" name="keyword" id="keyword" value="">
+						</div>
+						<div class="col-md-1">
+							<input class="btn btn-lg btn-success" type="button" name="sub" id="searchSub" value="搜尋">
+						</div>
+						<div style="margin-top: 30px;" class="col-md-12">
 
 							<!-- <div class="form-group">
 								
@@ -110,7 +121,7 @@ $total = $pdo->query($sqlTotal)->fetch(PDO::FETCH_NUM)[0];
 										<th class="text-center" scope="col ">
 											<div class="checkbox">
 												<label>
-													<input type="checkbox" value="">
+													<input type="checkbox" style="position: unset;" value="">
 												</label>
 											</div>
 										</th>
@@ -126,29 +137,29 @@ $total = $pdo->query($sqlTotal)->fetch(PDO::FETCH_NUM)[0];
 										<th scope="col">操作</th>
 									</tr>
                                 </thead>
-								<tbody>
+								<tbody id="mainTable">
 								<?php
                                 $sql = "SELECT `itemId`, `itemName`, `itemImg`, `itemCategoryId`, 
                                                `itemSellerId`, `itemPrice`, `itemQty`, `itemStatus`, 
                                                `updated_at`
                                         FROM `items`
-										-- LIMIT ?, ?
+										LIMIT ?, ?
 										";
-                                // $arrParam = [
-                                //     ($page - 1) * $numPerPage,
-                                //     $numPerPage];
+                                $arrParam = [
+                                    ($page - 1) * $numPerPage,
+                                    $numPerPage];
 
                                 $stmt = $pdo->prepare($sql);
-                                $stmt->execute(); // $arrParam
+                                $stmt->execute($arrParam); // $arrParam
                                 if($stmt->rowCount() > 0){
                                     $arr = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     for($i = 0; $i < count($arr); $i++){
                                 ?>
 									<tr>
 										<td class="text-center" scope="col ">
-											<div class="checkbox">
-                                                <input type="checkbox" style="position: unset;" name="chk" value="<?php echo $arr[$i]['itemId'] ?>" >
-											</div>
+											
+											<input type="checkbox" style="position: unset;" name="chk" value="<?php echo $arr[$i]['itemId'] ?>" >
+											
 										</td>
                                         <td><?php echo $arr[$i]['itemId']?></td>
 										<td>
@@ -171,12 +182,12 @@ $total = $pdo->query($sqlTotal)->fetch(PDO::FETCH_NUM)[0];
                                 }
                                 ?>
 								</tbody>
-								<tfoot>
+								<tfoot id="tablePage">
 									<tr>
 										<td class="border" colspan="11">
-										<!-- <?php for($i = 1; $i <= $totalPages; $i++){ ?>
+										<?php for($i = 1; $i <= $totalPages; $i++){ ?>
 										<a href="?page=<?php echo $i ?>"><?php echo $i ?></a>
-										<?php } ?> -->
+										<?php } ?>
 										</td>
 									</tr>
 								</tfoot>
@@ -200,10 +211,7 @@ $total = $pdo->query($sqlTotal)->fetch(PDO::FETCH_NUM)[0];
 						</button>
 					</div>
 					<div class="modal-body">
-
-					<!-- <input type="hidden" name="chk[]" value="<?php  echo $post;?>" id="itemId"> -->
-					<!-- <input id="chk"> -->
-
+					
 					<label>商品類別</label>
 					<select class="form-control slt" name="itemStatus" id="itemStatus">
 						<option value="上架" selected>上架</option>
@@ -228,14 +236,14 @@ $total = $pdo->query($sqlTotal)->fetch(PDO::FETCH_NUM)[0];
 	</div>    
 	<script>
 	
-	function check(formObj) {
-			var obj = formObj.chk;
-			var sele = [];
-			for (var i = 0; i < obj.length; i++) {
-				if (obj[i].checked) {
-					sele.push(obj[i].value);
+		function check(formObj) {
+				var obj = formObj.chk;
+				var sele = [];
+				for (var i = 0; i < obj.length; i++) {
+					if (obj[i].checked) {
+						sele.push(obj[i].value);
 
-				}
+					}
 				
 			}
 			console.log(sele);
@@ -247,21 +255,81 @@ $total = $pdo->query($sqlTotal)->fetch(PDO::FETCH_NUM)[0];
 				newinput.setAttribute('value', itemId);
 				var status = document.getElementById("itemStatus");
 				status.insertBefore(newinput, status.childNodes[0]);
-				// document.getElementById("demo").innerHTML += index + ":" + item + "<br>"; 
 			}
 			// console.log(sele);
 			// return sele;
 			
 		}
 		
+		$("#searchSub").on('click',function () {
+			
+			console.log($('#searchType').val());
+			console.log($('#keyword').val());
+			$.ajax({
+				url: "itemSearch.php",
+				data: {
+					searchType: $('#searchType').val(),
+					keyword: $('#keyword').val()
+				},
+				type: "POST",
+				dataType: "json",
+				success: function (data) {
+					console.log(data);
+					$('tbody#mainTable').empty();
+					$('tfoot#tablePage').empty();
 
+					let jsonlength = data.length;
 
-		$()
+					let itemId, itemName, itemImg, itemCategoryId, 
+					itemSellerId, itemPrice, itemQty, itemStatus, 
+					updated_at;
+
+					for (let i = 0; i < jsonlength; i++) {
+						itemId = data[i]['itemId'];
+						itemName = data[i]['itemName'];
+						itemImg = data[i]['itemImg'];
+						itemCategoryId = data[i]['itemCategoryId'];
+						itemSellerId = data[i]['itemSellerId'];
+						itemPrice = data[i]['itemPrice'];
+						itemQty = data[i]['itemQty'];
+						itemStatus = data[i]['itemStatus'];
+						updated_at = data[i]['updated_at'];
+
+						$('tbody#mainTable').append(`
+							<tr>
+								<td class="text-center" scope="col ">
+									
+									<input type="checkbox" style="position: unset;" name="chk" value="${itemId}" >
+									
+								</td>
+								<td>${itemId}</td>
+								<td>
+									<img style="max-width: 100px " src="../image/items/${itemImg}">
+								</td>
+								<td>${itemName}</td>
+								<td>${itemCategoryId}</td>
+								<td>${itemSellerId}</td>
+								<td>\$${itemPrice}</td>
+								<td>${itemQty}</td>
+								<td>-</td>
+								<td>${itemStatus}</td>
+								<td>
+									<a  href="./itemEdit.php?editId=${itemId}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>修改 </a>
+									<a href="./itemDelete.php?deleteId=${itemId}" onclick="return confirm('是否確定要刪除?')"><i class="fa fa-trash-o" aria-hidden="true"></i>刪除 </a>
+								</td>
+							</tr>
+						`);
+
+					}
+					
+				}
+			})
+		})
+
+		
 	</script>
 	<script src="../js/bootstrap.min.js"></script>
-	<?php
-	$post = json_decode( $_COOKIE['post'], true );
-	?>
+	
 	
 
 </body>
